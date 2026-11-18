@@ -1,0 +1,42 @@
+PS D:\Data_Structure__AND__AI___VSCODE\DA____AI> & 'C:\Users\DELL\AppData\Local\Microsoft\WindowsApps\python3.13.exe' 'd:/Data_Structure__AND__AI___VSCODE/DA____AI/ML_AI_FOUNDATION/DAY8/Hard_Margin_KKT_dual_primal_system.py'
+primal objective fun : 0.4444444444444444
+dual objective fun : 0.44444444444444453
+also be obseverd that D*<=P* always as D* is tightest possible lower bound for P*
+
+strong duality P*=D*
+
+->->-> Under strong duality then observed that norm w square =sum alpha verified
+
+intercept is verified.
+
+========== SKLEARN VERIFICATION ==========
+Weight vector w verified
+ours    : [0.66666667 0.66666667]
+sklearn : [0.66666667 0.66666667]
+✓ Intercept b verified
+ours    : -0.9999999999999998
+sklearn : -0.9999999999998667
+ Dual coefficients verified
+ours    : [ 0.22222222  0.22222222 -0.44444444]
+sklearn : [ 0.22222222  0.22222222 -0.44444444]
+
+Our Model
+w*      = [0.666667 0.666667]
+b*      = -1.0
+margin  = 1.06066
+
+Sklearn Model
+w*      = [0.666667 0.666667]
+b*      = -1.0
+
+SUCCESS: From-Scratch KKT Solver matches Scikit-Learn SVC
+
+Recovered Parameters
+alpha = [0.22222222 0.22222222 0.44444444]
+w     = [0.66666667 0.66666667]
+b     = -0.9999999999999998
+
+Predictions
+x = [3, 3] -> class 1
+x = [0.2, 0.1] -> class -1
+x = [1.5, 1.5] -> class 1
