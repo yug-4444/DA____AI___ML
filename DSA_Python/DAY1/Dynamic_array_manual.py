@@ -18,7 +18,7 @@ class dynamic_array():
         self.array=copy_array
 
     def shrinkage(self):
-        self.capacity=self.capacity//2
+        self.capacity=max(1,self.capacity//2)
         copy_array=[None]*self.capacity
         for i in range(self.current):
             copy_array[i]=self.array[i]
@@ -34,14 +34,18 @@ class dynamic_array():
     def pop(self):
         if(self.current==0):
             raise IndexError("Array empty")
-        if(4*self.current<=self.capacity):
-            self.shrinkage()
+        pr=self.array[self.current-1]
         self.current-=1
         self.array[self.current]=None
+        if self.capacity>1 and 4*self.current<=self.capacity:
+            self.shrinkage()
+        return pr
 
     def display_and_cost(self):
-        print(self.array)
-        print(f"cost = {self.copy_resize}")
+        print(self.array[:self.current])
+        print(f"size = {self.current}")
+        print(f"capacity = {self.capacity}")
+        print(f"copy cost = {self.copy_resize}")
 
     def give_back(self):
         return self.array,self.current
