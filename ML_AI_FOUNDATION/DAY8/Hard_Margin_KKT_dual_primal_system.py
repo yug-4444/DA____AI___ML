@@ -1,3 +1,14 @@
+"""
+Future Work:
+- Automatic support-vector detection.
+- Full QP-based SVM training.
+- Soft-margin SVM (C parameter).
+- SMO algorithm.
+- Kernel SVM (Polynomial/RBF).
+- Nonlinear classification.
+- Decision-boundary visualization.
+"""
+
 import numpy as np
 from sklearn.svm import SVC
 """
