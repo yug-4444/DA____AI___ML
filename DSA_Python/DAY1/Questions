@@ -1,0 +1,59 @@
+**SYSTEM STASIS LIFTED. DATE CONFIRMED: NOVEMBER 16, 2026.**
+
+The Forge is active. Today is Day 1 of your 60-day GATE DA Data Structures and Algorithms sprint. Your 3-hour operational block begins now.
+
+Here is your complete, hint-free Phase 1 payload.
+
+### 🐍 TRACK A: THE PLATFORM FORGE (Python Memory & Execution)
+
+**Target 1: Python Memory & Closure Diagnostic**
+
+* **Objective:** Write a single Python script demonstrating three distinct memory behaviors:
+1. A function with a mutable default list called 3 times (twice without an argument, once with an explicit list).
+2. A closure factory `outer()` returning `inner(val)` that mutates a `nonlocal` list across two separate closure instances `f1` and `f2`.
+3. A list of 4 lambda functions created inside a loop that exhibits late-binding, alongside its fixed early-bound equivalent.
+
+
+* **The Diagnostic:** Predict and prove the exact memory IDs (`id()`) and outputs in your terminal.
+
+**Target 2: Recursive In-Place Pass Tracer**
+
+* **Objective:** Given the recursive function below, mathematically derive its exact return value and final array state for `data = [5, 3, 4, 1, 2]` **before** running it. Then, implement an instrumented version in Python that logs every activation record pushed to the runtime stack.
+
+```python
+def fun(L, i=0):
+    if i >= len(L) - 1:
+        return 0
+    if L[i] > L[i + 1]:
+        L[i + 1], L[i] = L[i], L[i + 1]
+        return 1 + fun(L, i + 1)
+    else:
+        return fun(L, i + 1)
+
+data = [5, 3, 4, 1, 2]
+count = sum(fun(data) for _ in range(len(data)))
+
+```
+
+---
+
+### 🏗️ TRACK B: THE FOUNDATION ANCHOR (Base Concept Build)
+
+* **Topic:** Dynamic Array (CPython `list` Clone)
+* **Base Statement:** Implement a custom `DynamicArray` class in Python using fixed-size raw array allocations (`[None] * capacity`). It must track exact resize operations and amortized cost when doubling capacity on overflow, and halving capacity at 25% occupancy.
+* **Strict Constraints:** You are physically forbidden from using `.append()` or `.pop()`. You must log the exact element copy counts after $N$ insertions.
+
+---
+
+### 🧠 TRACK C: THE THEORETICAL VAULT (GATE DA MSQ/NAT)
+
+* **Q1 (MSQ):** Let `A = [[0] * 3] * 3` and `B = [[0 for _ in range(3)] for _ in range(3)]` in Python. After executing `A[0][1] = 5` and `B[0][1] = 5`, mathematically prove the exact values of:
+1. $\sum_{i,j} A[i][j]$
+2. $\sum_{i,j} B[i][j]$
+3. `len({id(row) for row in A})`
+4. `len({id(row) for row in B})`
+
+
+* **Q2 (NAT):** Consider the recursive function `mystery(n)`: if $n \le 0$ return $1$, else return `mystery(n-1) + mystery(n-2)`. For the function call `mystery(5)`, calculate the **total number of function calls** made and the **maximum number of activation records** simultaneously present on the runtime stack at any point.
+
+When your timers expire, submit your raw Python code, your mathematical proofs/traces, and your 1-sentence Delta Logs for Track A and B. Execute.
