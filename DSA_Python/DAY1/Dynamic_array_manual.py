@@ -62,3 +62,4 @@ arr.display_and_cost()
 for i in range(10):
     arr.append(i+10)
 arr.display_and_cost()
+arr
