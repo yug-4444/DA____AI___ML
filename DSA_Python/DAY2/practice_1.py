@@ -1,3 +1,9 @@
-d={1:3,2:6}
-it=iter(d)
-print(it)
+def gen(n):
+    for i in range(n):
+        yield i*i
+
+g=gen(4)
+a=list(g)
+b=sum(g)
+print(b)
+next(g)

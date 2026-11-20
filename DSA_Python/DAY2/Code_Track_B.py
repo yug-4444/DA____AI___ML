@@ -126,144 +126,154 @@ def manual_deepcopy(obj,memo=None):
 #work everything except tuple<->tuple cycle
 class tuple_obj:
     def __init__(self):
-        self.list_item=[]
+        self.list_item = []
 
-def clone_corpse(obj,memo=None):
+
+def clone_corpse(obj, memo=None):
     if memo is None:
-        memo={}
-    obj_id=id(obj)
-    if obj_id in memo.keys():
+        memo = {}
+    obj_id = id(obj)
+    if obj_id in memo:
         return
-    if isinstance(obj,(int,float,bool,str,type(None))):
+    if isinstance(obj, (int, float, bool, str, type(None))):
         return
-    elif isinstance(obj,list):
-        memo[obj_id]=[]
+    elif isinstance(obj, list):
+        memo[obj_id] = []
         for item in obj:
-            clone_corpse(item,memo)
-    elif isinstance(obj,set):
-        memo[obj_id]=set()
+            clone_corpse(item, memo)
+    elif isinstance(obj, set):
+        memo[obj_id] = set()
         for item in obj:
-            clone_corpse(item,memo)
-    elif isinstance(obj,dict):
-        memo[obj_id]={}
-        for k,v in obj.items():
-            clone_corpse(k,memo)
-            clone_corpse(v,memo)
-    elif isinstance(obj,tuple):
-        memo[obj_id]=tuple_obj()
+            clone_corpse(item, memo)
+    elif isinstance(obj, dict):
+        memo[obj_id] = {}
+        for k, v in obj.items():
+            clone_corpse(k, memo)
+            clone_corpse(v, memo)
+    elif isinstance(obj, tuple):
+        memo[obj_id] = tuple_obj()
         for item in obj:
-            clone_corpse(item,memo)
+            clone_corpse(item, memo)
 
-def illusion_connect(obj,memo,visited=None):#tuple obj are not real that are suppose to be connected 
+def illusion_connect(obj, memo, visited=None):
     if visited is None:
-        visited=set()
-    obj_id=id(obj)
-    if obj_id in visited:
+        visited = set()
+    obj_id = id(obj)
+    if obj_id in visited or obj_id not in memo:
         return
     visited.add(obj_id)
-    if isinstance(obj,(int,float,str,bool,type(None))):
+    if isinstance(obj, (int, float, str, bool, type(None))):
         return
-    elif isinstance(obj,list):
-        clone=memo[obj_id]
+    elif isinstance(obj, list):
+        clone = memo[obj_id]
         for item in obj:
-            clone.append(memo.get(id(item),item))
-            illusion_connect(item,memo,visited)
-    elif isinstance(obj,set):
-        clone=memo[obj_id]
+            clone.append(memo.get(id(item), item))
+            illusion_connect(item, memo, visited)
+    elif isinstance(obj, set):
+        clone = memo[obj_id]
         for item in obj:
-            clone.add(memo.get(id(item),item))
-            illusion_connect(item,memo,visited)
-    elif isinstance(obj,dict):
-        clone=memo[obj_id]
-        for k,v in obj.items():
-            clone[memo.get(id(k),k)]=memo.get(id(v),v)
-            illusion_connect(k,memo,visited)
-            illusion_connect(v,memo,visited)
-    elif isinstance(obj,tuple):
-        clone=memo[obj_id]
+            clone.add(memo.get(id(item), item))
+            illusion_connect(item, memo, visited)
+    elif isinstance(obj, dict):
+        clone = memo[obj_id]
+        for k, v in obj.items():
+            clone[memo.get(id(k), k)] = memo.get(id(v), v)
+            illusion_connect(k, memo, visited)
+            illusion_connect(v, memo, visited)
+    elif isinstance(obj, tuple):
+        clone = memo[obj_id]
         for item in obj:
-            clone.list_item.append(memo.get(id(item),item))
-            illusion_connect(item,memo,visited)
+            clone.list_item.append(memo.get(id(item), item))
+            illusion_connect(item, memo, visited)
 
-def find_tuple_obj(obj,memo,placeholder_tuple=None,visited=None):
+def resolve_tuple(placehold, placeholder_tuple):
+    if placehold in placeholder_tuple:
+        return placeholder_tuple[placehold]
+    temp = []
+    for x in placehold.list_item:
+        if isinstance(x, tuple_obj):
+            temp.append(resolve_tuple(x, placeholder_tuple))
+        else:
+            temp.append(x)
+    true_tuple = tuple(temp)
+    placeholder_tuple[placehold] = true_tuple
+    return true_tuple
+
+def find_tuple_obj(obj, memo, placeholder_tuple=None, visited=None):
     if placeholder_tuple is None:
-        placeholder_tuple={}
+        placeholder_tuple = {}
     if visited is None:
-        visited=set()
-    obj_id=id(obj)
+        visited = set()
+    obj_id = id(obj)
     if obj_id in visited:
         return
     visited.add(obj_id)
-    if isinstance(obj,(int,float,str,bool,type(None))):
+    if isinstance(obj, (int, float, str, bool, type(None))):
         return
-    if isinstance(obj,(list,set)):
+    if isinstance(obj, (list, set)):
         for items in obj:
-            find_tuple_obj(items,memo,placeholder_tuple,visited)
-    elif isinstance(obj,dict):
-        for k,v in obj.items():
-            find_tuple_obj(k,memo,placeholder_tuple,visited)
-            find_tuple_obj(v,memo,placeholder_tuple,visited)
-    elif isinstance(obj,tuple):
+            find_tuple_obj(items, memo, placeholder_tuple, visited)
+    elif isinstance(obj, dict):
+        for k, v in obj.items():
+            find_tuple_obj(k, memo, placeholder_tuple, visited)
+            find_tuple_obj(v, memo, placeholder_tuple, visited)
+    elif isinstance(obj, tuple):
+        placehold = memo[obj_id]
+        if isinstance(placehold, tuple_obj):
+            memo[obj_id] = resolve_tuple(placehold, placeholder_tuple)
         for item in obj:
-            find_tuple_obj(item,memo,placeholder_tuple,visited)
-        placehold=memo[obj_id]
-        temp = []
-        for x in placehold.list_item:
-            if isinstance(x, tuple_obj):
-                temp.append(placeholder_tuple.get(x, x))
-            else:
-                temp.append(x)
-        true_tuple = tuple(temp)
-        placeholder_tuple[placehold] = true_tuple
-        memo[obj_id]=true_tuple
+            find_tuple_obj(item, memo, placeholder_tuple, visited)
 
-def illusion_to_reality(obj,memo,placeholder_tuple=None,visited=None):
+def illusion_to_reality(obj, memo, placeholder_tuple=None, visited=None):
     if placeholder_tuple is None:
-        placeholder_tuple={}
+        placeholder_tuple = {}
     if visited is None:
-        visited=set()
-    if isinstance(obj,(int,float,str,bool,type(None))):
+        visited = set()
+    if isinstance(obj, (int, float, str, bool, type(None))):
         return
-    obj_id=id(obj)
-    if obj_id in visited:
+    obj_id = id(obj)
+    if obj_id in visited or obj_id not in memo:
         return
     visited.add(obj_id)
-    clone=memo[id(obj)]
-    if isinstance(clone,list):
+    clone = memo[obj_id]
+    if isinstance(clone, list):
         for i in range(len(clone)):
-            if isinstance(clone[i],tuple_obj):
-                clone[i]=(placeholder_tuple[clone[i]])
+            if isinstance(clone[i], tuple_obj):
+                clone[i] = placeholder_tuple[clone[i]]
         for item in obj:
-            illusion_to_reality(item,memo,placeholder_tuple,visited)
-    elif isinstance(clone,set):
-        replace=set()
+            illusion_to_reality(item, memo, placeholder_tuple, visited)
+    elif isinstance(clone, set):
+        replace = set()
         for item in clone:
-            if isinstance(item,tuple_obj):
-                item=placeholder_tuple[item]
+            if isinstance(item, tuple_obj):
+                item = placeholder_tuple[item]
             replace.add(item)
         clone.clear()
         clone.update(replace)
         for item in obj:
-            illusion_to_reality(item,memo,placeholder_tuple,visited)
-    elif isinstance(clone,dict):
-        replace={}
-        for k,v in clone.items():
-            if isinstance(k,tuple_obj):
-                k=(placeholder_tuple[k])
-            if isinstance(v,tuple_obj):
-                v=(placeholder_tuple[v])
-            replace[k]=v
+            illusion_to_reality(item, memo, placeholder_tuple, visited)
+    elif isinstance(clone, dict):
+        replace = {}
+        for k, v in clone.items():
+            if isinstance(k, tuple_obj):
+                k = placeholder_tuple[k]
+            if isinstance(v, tuple_obj):
+                v = placeholder_tuple[v]
+            replace[k] = v
         clone.clear()
         clone.update(replace)
-        for k,v in obj.items():
-            illusion_to_reality(k,memo,placeholder_tuple,visited)
-            illusion_to_reality(v,memo,placeholder_tuple,visited)
+        for k, v in obj.items():
+            illusion_to_reality(k, memo, placeholder_tuple, visited)
+            illusion_to_reality(v, memo, placeholder_tuple, visited)
+    elif isinstance(clone, tuple):
+        for item in obj:
+            illusion_to_reality(item, memo, placeholder_tuple, visited)
 
 def manual_deepcopy(obj):
-    memo={}
-    clone_corpse(obj,memo)
-    illusion_connect(obj,memo)
-    placeholder_tuple={}
-    find_tuple_obj(obj,memo,placeholder_tuple)
-    illusion_to_reality(obj,memo,placeholder_tuple)
-    return memo.get(id(obj),obj)
+    memo = {}
+    clone_corpse(obj, memo)
+    illusion_connect(obj, memo)
+    placeholder_tuple = {}
+    find_tuple_obj(obj, memo, placeholder_tuple)
+    illusion_to_reality(obj, memo, placeholder_tuple)
+    return memo.get(id(obj), obj)
