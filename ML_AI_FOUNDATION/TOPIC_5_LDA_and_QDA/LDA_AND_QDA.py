@@ -477,56 +477,6 @@ print(np.mean(sk_lda.predict(X)==y))
 
 
 # ------------------------------------------------------------
-# EXAMPLE 3
-# Nearly Singular Covariance Matrix
-# Tests pinv()
-# ------------------------------------------------------------
-print("\n\nEXAMPLE 3 -----------------------------------------------------")
-
-np.random.seed(42)
-
-n = 3000
-
-z = np.random.randn(n,5)
-
-X = np.hstack([
-    z,
-    z[:,0:1]*2,
-    z[:,1:2]*3,
-    z[:,2:3]*5,
-    z[:,3:4]*7,
-    z[:,4:5]*4
-])
-
-y = np.random.randint(0,3,n)
-
-my_qda = QDA_K_CLASS(X,y)
-my_lda = GDA_K_CLASS(X,y)
-
-print("My QDA Accuracy:")
-print(my_qda.accuracy(X,y))
-
-print()
-
-print("My LDA Accuracy:")
-print(my_lda.accuracy(X,y))
-
-print()
-
-sk_qda = QuadraticDiscriminantAnalysis()
-sk_qda.fit(X,y)
-
-print("Sklearn QDA Accuracy:")
-print(np.mean(sk_qda.predict(X)==y))
-
-print()
-
-sk_lda = LinearDiscriminantAnalysis()
-sk_lda.fit(X,y)
-
-print("Sklearn LDA Accuracy:")
-print(np.mean(sk_lda.predict(X)==y))
-
 
 # ------------------------------------------------------------
 # EXAMPLE 4
