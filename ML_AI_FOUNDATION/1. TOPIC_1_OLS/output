@@ -1,0 +1,12 @@
+PS D:\Data_Structure__AND__AI___VSCODE\DA____AI> & 'C:\Users\DELL\AppData\Local\Microsoft\WindowsApps\python3.13.exe' '"d:/Data_Structure__AND__AI___VSCODE/DA____AI/ML_AI_FOUNDATION/1. TOPIC_1_OLS/Ordinary_Least_Square.py"'
+intercept (beta_0) :-0.3333
+slope (beta_1) :2.0000
+residual sum of square (rss) :0.6667
+
+!!!! Successfull !!!!
+Number of samples : 3
+Number of features: 2
+Intercept (beta_0): 0.0000
+beta_1: -1.0000
+beta_2: 1.5000
+RSS: 0.0000

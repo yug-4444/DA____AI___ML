@@ -1,0 +1,94 @@
+Example 1----------------------------------------
+My LDA Accuracy:
+0.968
+
+Sklearn Accuracy:
+0.968
+
+
+EXAMPLE 2-----------------------------------------------------------------
+My Multiclass LDA Accuracy:
+0.9903333333333333
+
+Sklearn Accuracy:
+0.9903333333333333
+
+
+EXAMPLE 3-----------------------------------------------------------------
+My Multiclass LDA Accuracy:
+0.689
+
+Sklearn Accuracy:
+0.689
+
+
+EXAMPLE 4-----------------------------------------------------------------
+My Multiclass LDA Accuracy:
+0.67
+
+Sklearn Accuracy:
+0.67
+
+
+EXAMPLE 5-----------------------------------------------------------------
+My Multiclass LDA Accuracy:
+0.8333
+
+Sklearn Accuracy:
+0.8333
+
+
+EXAMPLE 1 -----------------------------------------------------
+My QDA Accuracy:
+0.99975
+
+My LDA Accuracy:
+0.9865
+
+Sklearn QDA Accuracy:
+0.99975
+
+Sklearn LDA Accuracy:
+0.9865
+
+
+EXAMPLE 2 -----------------------------------------------------
+My QDA Accuracy:
+0.99025
+
+My LDA Accuracy:
+0.98225
+
+Sklearn QDA Accuracy:
+0.99025
+
+Sklearn LDA Accuracy:
+0.98225
+
+
+EXAMPLE 4 -----------------------------------------------------
+My QDA Accuracy:
+0.9997777777777778
+
+My LDA Accuracy:
+0.9911111111111112
+
+Sklearn QDA Accuracy:
+0.9997777777777778
+
+Sklearn LDA Accuracy:
+0.9911111111111112
+
+
+EXAMPLE 5 -----------------------------------------------------
+My QDA Accuracy:
+0.9995
+
+My LDA Accuracy:
+0.9468
+
+Sklearn QDA Accuracy:
+0.9995
+
+Sklearn LDA Accuracy:
+0.9468

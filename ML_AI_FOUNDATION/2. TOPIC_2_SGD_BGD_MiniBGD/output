@@ -1,0 +1,46 @@
+PS D:\Data_Structure__AND__AI___VSCODE\DA____AI> & 'C:\Users\DELL\AppData\Local\Microsoft\WindowsApps\python3.13.exe' '"d:/Data_Structure__AND__AI___VSCODE/DA____AI/ML_AI_FOUNDATION/2. TOPIC_2_SGD_BGD_MiniBGD/Batch_Gradient_OLS.py"'
+GD intercept->beta_0 :0.9998
+
+GD slope->beta_1 :2.0001
+now lets see using buildin function
+
+Success: Your Batch Gradient Descent converged to the exact OLS parameters!
+lets check clas for a example
+
+[ 5. 18. 19. 11. 28. 16. 33. 21. 38. 26.]
+early convergence in steps:759
+
+[[ 4.99999994]
+ [ 1.99999999]
+ [-2.99999998]
+ [ 4.00000002]]
+lets check wheather our gradient descent result satisfy!!!
+
+testing succesfull!!!!!!
+
+Samples   : 10
+Features  : 3
+Parameters: 4
+
+Coefficients:
+[[ 4.99999994]
+ [ 1.99999999]
+ [-2.99999998]
+ [ 4.00000002]]
+another example used!!!!
+
+early convergence in steps:12
+
+Coefficient Error = 9.935661e-03
+lets check wheather our gradient descent result satisfy!!!
+
+testing succesfull!!!!!!
+
+another example used!!!!
+
+early convergence in steps:36
+
+Coefficient Error = 3.290993e-02
+lets check wheather our gradient descent result satisfy!!!
+
+testing succesfull!!!!!!

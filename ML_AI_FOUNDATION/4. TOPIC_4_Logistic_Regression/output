@@ -1,0 +1,133 @@
+Initial Cost:
+0.6931471805599454
+early break in steps:4170.
+
+Cost After Training:
+0.3414106422075546
+
+Learned Beta:
+[[ 1.50187   ]
+ [-2.09427259]
+ [ 0.83486286]
+ [ 1.23001989]
+ [-0.98800257]
+ [ 0.52535782]]
+Training Accuracy = 0.8442
+Probabilities:
+[[0.53194911]
+ [0.00715953]
+ [0.99981037]]
+
+Predictions:
+[[1]
+ [0]
+ [1]]
+C:\Users\DELL\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\sklearn\linear_model\_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+Sklearn Accuracy:
+0.8442
+True Beta:
+[ 1.5 -2.   0.8  1.2 -1.   0.5]
+
+Your Beta:
+[ 1.50187    -2.09427259  0.83486286  1.23001989 -0.98800257  0.52535782]
+
+Sklearn Beta:
+[ 1.50166163 -2.09392491  0.83475486  1.22987184 -0.98785154  0.52528923]
+============================================================
+another stress test
+============================================================
+X Shape : (100000, 20)
+y Shape : (100000, 1)
+Initial Cost:
+0.6931471805599451
+
+Final Cost:
+0.2434543174216968
+
+Training Accuracy:
+0.89321
+C:\Users\DELL\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\sklearn\linear_model\_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+Sklearn Accuracy:
+0.89323
+Your Beta Shape:
+(21, 1)
+Sklearn Beta Shape:
+21
+
+First 10 Coefficients
+
+Yours:
+[ 1.05511244 -0.50473125  0.12699563 -1.480733   -0.29624874 -1.94302147
+ -0.32085394  1.50499236  1.93172344 -1.69996255]
+
+Sklearn:
+[ 1.08295955 -0.51761022  0.13057522 -1.51894595 -0.3041498  -1.99318931
+ -0.32898618  1.54387437  1.98204724 -1.74402853]
+Probabilities:
+[[0.96029074]
+ [0.72198319]
+ [0.72461628]
+ [0.97319741]
+ [0.68194543]]
+
+Classes:
+[[1]
+ [1]
+ [1]
+ [1]
+ [1]]
+============================================================
+another stress test
+============================================================
+GD Initial Loss = 0.6931471805599454
+GD Final Loss = 0.29734993925574255
+GD Accuracy = 0.8684
+Newton Initial Loss = 0.6931471805599454
+early break in steps: 6.
+Newton Final Loss = 0.2973498828575418
+Newton Accuracy = 0.8684
+True Beta
+[ 1.56184071 -0.09422831 -1.3295356  -1.38863813 -0.34265078 -1.58051977
+  0.58714807  0.1981725   0.0495192  -0.6193627  -0.94489762 -0.93269474
+  0.17683628  0.20371839 -0.35018613 -1.36215693  0.74746454 -0.49795902
+  0.12520995  0.38238882  0.12485267]
+
+Gradient Descent Beta
+[ 1.53581169e+00 -1.63353633e-01 -1.40389611e+00 -1.45932927e+00
+ -3.69967821e-01 -1.55765183e+00  6.06471463e-01  1.27933678e-01
+  5.52595599e-04 -6.53899428e-01 -9.22823986e-01 -9.19499452e-01
+  9.97431134e-02  2.28417011e-01 -3.55749363e-01 -1.42216691e+00
+  7.82489757e-01 -5.29948893e-01  6.54704954e-02  4.04509906e-01
+  1.52560472e-01]
+
+Newton Beta
+[ 1.53678153e+00 -1.63458055e-01 -1.40479604e+00 -1.46025296e+00
+ -3.70202846e-01 -1.55864990e+00  6.06885417e-01  1.27999715e-01
+  5.30594696e-04 -6.54325802e-01 -9.23408259e-01 -9.20080313e-01
+  9.97974420e-02  2.28584497e-01 -3.55985212e-01 -1.42310478e+00
+  7.82985431e-01 -5.30316361e-01  6.55304892e-02  4.04757658e-01
+  1.52671391e-01]
+Index | True | GD | Newton
+ 0 |   1.5618 |   1.5358 |   1.5368
+ 1 |  -0.0942 |  -0.1634 |  -0.1635
+ 2 |  -1.3295 |  -1.4039 |  -1.4048
+ 3 |  -1.3886 |  -1.4593 |  -1.4603
+ 4 |  -0.3427 |  -0.3700 |  -0.3702
+ 5 |  -1.5805 |  -1.5577 |  -1.5586
+ 6 |   0.5871 |   0.6065 |   0.6069
+ 7 |   0.1982 |   0.1279 |   0.1280
+ 8 |   0.0495 |   0.0006 |   0.0005
+ 9 |  -0.6194 |  -0.6539 |  -0.6543
+10 |  -0.9449 |  -0.9228 |  -0.9234
+11 |  -0.9327 |  -0.9195 |  -0.9201
+12 |   0.1768 |   0.0997 |   0.0998
+13 |   0.2037 |   0.2284 |   0.2286
+14 |  -0.3502 |  -0.3557 |  -0.3560
+15 |  -1.3622 |  -1.4222 |  -1.4231
+16 |   0.7475 |   0.7825 |   0.7830
+17 |  -0.4980 |  -0.5299 |  -0.5303
+18 |   0.1252 |   0.0655 |   0.0655
+19 |   0.3824 |   0.4045 |   0.4048
+20 |   0.1249 |   0.1526 |   0.1527
