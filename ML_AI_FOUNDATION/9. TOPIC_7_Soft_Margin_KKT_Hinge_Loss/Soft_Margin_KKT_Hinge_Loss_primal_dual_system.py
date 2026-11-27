@@ -185,12 +185,6 @@ class SoftMargin_dual_primal_system:
         margin_distance=self.margin_distance_score()
         for _ in range(max_iter):
             idx=np.random.permutation(self.m)
-            check_mask=(margin_distance<1).ravel()
-            check_w_grad=lamb*self.w-1/self.m*(np.sum(self.y[idx][check_mask]*self.x[idx][check_mask],axis=0)).reshape(-1,1)
-            check_b_grad=-1/self.m*np.sum(self.y[idx][check_mask],axis=0)
-            if np.linalg.norm(check_w_grad)<1e-6 and np.linalg.norm(check_b_grad)<1e-6:
-                print(f"converged early at iteration {_}")
-                break
             for i in range(0,self.m,batch_size):
                 batch_idx=idx[i:i+batch_size]
                 current_batch_size=len(batch_idx)
@@ -212,11 +206,6 @@ class SoftMargin_dual_primal_system:
         self.beta=0.0
         for _ in range(max_iter):
             idx=np.random.permutation(self.m)
-            check_alpha_grad=np.ones((self.m,1))-self.G[idx,:]@self.alpha-self.beta*self.y[idx]
-            check_beta_grad=-(self.y[idx].T@self.alpha).item()
-            if np.linalg.norm(check_alpha_grad)<1e-6 and np.linalg.norm(check_beta_grad)<1e-6:
-                print(f"converged early at iteration {_}")
-                break
             for i in range(0,self.m,batch_size):
                 batch_idx=idx[i:i+batch_size]
                 current_batch_size=len(batch_idx)
